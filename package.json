@@ -1,0 +1,34 @@
+{
+  "name": "weatherforecat",
+  "description": "The Weather Forecat",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open",
+    "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src",
+    "lint:fix": "yarn lint --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@neutrinojs/airbnb-base": "^9.0.0-rc.3",
+    "@neutrinojs/copy": "^9.0.0-rc.3",
+    "@neutrinojs/image-loader": "^9.0.0-rc.3",
+    "@neutrinojs/jest": "^9.0.0-rc.3",
+    "@neutrinojs/web": "^9.0.0-rc.3",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "neutrino": "^9.0.0-rc.3",
+    "prettier": "^1.18.2",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "graphql": "^14.3.1"
+  }
+}
