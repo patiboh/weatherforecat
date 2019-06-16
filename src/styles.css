@@ -1,0 +1,91 @@
+:root * {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  border: none;
+  font-family: "Cinzel", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+h1,
+p,
+pre,
+.container {
+  padding: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+h1,
+label {
+  color: white;
+}
+
+
+h1,
+p {
+  text-align: center;
+}
+
+p,
+pre,
+form {
+  margin: 2rem 0 1rem;
+}
+
+h1 {
+  font-size: 5rem;
+  white-space: pre-wrap;
+  margin-top: 0;
+}
+
+label {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+#root {
+  background-image: url('./static/images/tup.jpg');
+  background-size: cover;
+  padding: 10rem 5rem;
+  margin: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100vw;
+  max-width: 100%;
+  height: 100%;
+  align-content: center;
+}
+
+.form {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.form input,
+.form button {
+  margin: 0 1rem;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+.form button {
+  padding: 8px 32px;
+}  
