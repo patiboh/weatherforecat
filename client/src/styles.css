@@ -1,4 +1,7 @@
 :root * {
+  --tablet-width: 768px; /* var(--tablet-width) doesn't work in media queries */
+  --color-light: #fff;
+  --color-background: blueviolet;
   box-sizing: border-box;
 }
 
@@ -11,6 +14,8 @@ body {
   font-family: "Cinzel", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 }
+
+/** TYPOGRAPHY */
 
 h1,
 p,
@@ -25,7 +30,7 @@ h1,
 p,
 label,
 pre {
-  color: white;
+  color: var(--color-light);
 }
 
 
@@ -43,31 +48,56 @@ form {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 3rem;
   white-space: pre-wrap;
   margin-top: 0;
 }
 
-p {
-  font-size: 2rem;
-}
-
 label {
   font-size: 1.5rem;
-  width: 100%;
-  margin-bottom: 2rem;
+  font-size: 1rem;
 }
 
 pre {
   white-space: pre-wrap;
   word-break: break-word;
-  max-width: 50vw;
+  max-width: 80vw;
 }
+
+@media(min-width: 768px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  
+  p {
+    font-size: 2rem;
+  }
+
+  pre {
+    max-width: 50vw;
+  }
+}
+
+@media(min-width: 768px) and (min-height: 768px) {
+  h1 {
+    font-size: 5rem;
+  }
+  label {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+
+/** LAYOUT */
 
 #root {
   background-image: url('./static/images/tup.jpg');
-  background-size: cover;
-  padding: 10rem 5rem;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--color-background);
+  padding: 5rem;
   margin: 0;
   width: 100vw;
   max-width: 100%;
@@ -83,12 +113,20 @@ pre {
   align-content: center;
 }
 
+@media(min-width: 768px) and (min-height: 768px) {
+  #root {
+    padding: 10rem 5rem;
+  }
+}
+
+/** FORM */
+
 .form {
   display: flex;
   flex-flow: row wrap;
   align-content: center;
   justify-content: center;
-  margin-top: 20vh;
+  margin-top: 15vh;
 }
 
 .form input,
@@ -101,3 +139,9 @@ pre {
 .form button {
   padding: 8px 32px;
 }  
+
+@media(min-width: 768px) and (min-height: 768px) {
+  form {
+    margin-top: 20vh;
+  }
+}

@@ -1,4 +1,4 @@
-import { OPENWEATHERMAP_API_URL, DEFAULT_SEARCH } from './constants';
+import { WEATHER_API_URL, DEFAULT_SEARCH } from './constants';
 
 import './styles.css';
 
@@ -44,7 +44,7 @@ const init = () => {
     e.preventDefault();
     responseContainer.innerHTML = '';
     searchedForText = searchField.value;
-    const query = `${OPENWEATHERMAP_API_URL}?q=${searchedForText}&APPID=${process.env.OPENWEATHERMAP_API_KEY}`;
+    const query = `${WEATHER_API_URL}?q=${searchedForText}&APPID=${process.env.WEATHER_API_KEY}`;
     fetch(query).then(res => res.json())
       .then(displayForecat)
       .catch(requestError);

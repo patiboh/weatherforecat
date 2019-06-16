@@ -11,7 +11,7 @@ module.exports = {
         title: process.env.APPLICATION_NAME
       },
       env: {
-        OPENWEATHERMAP_API_KEY: process.env.OPENWEATHERMAP_API_KEY
+        WEATHER_API_KEY: process.env.WEATHER_API_KEY
       } 
     }),
     copy({

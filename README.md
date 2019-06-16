@@ -1,10 +1,11 @@
 # The Weather Forecat
 
-An ode to my cat and an exploration of technologies that I find interesting
+A weather app, an ode to my cat, and an excuse to play with data and shaders
 
 ## Technologies & Tools
 
 - [GraphQL](https://graphql.org/)
+- [Apollo](https://www.apollographql.com/docs/)
 - [Neutrino (testing version 9.0.0-rc.3)](https://neutrinojs.org/)
 - [WebGL](https://get.webgl.org/)
 - [three.js](https://threejs.org/)
