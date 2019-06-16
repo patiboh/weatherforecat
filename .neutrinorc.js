@@ -8,8 +8,11 @@ module.exports = {
     airbnbBase(),
     web({
       html: {
-        title: "The Weather Forecat"
-      }
+        title: process.env.APPLICATION_NAME
+      },
+      env: {
+        OPENWEATHERMAP_API_KEY: process.env.OPENWEATHERMAP_API_KEY
+      } 
     }),
     copy({
       patterns: [
