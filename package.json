@@ -17,6 +17,12 @@
       "pre-commit": "lint-staged"
     }
   },
+  "lint-staged": {
+    "*.js": [
+      "yarn lint:fix",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@neutrinojs/airbnb-base": "^9.0.0-rc.3",
     "@neutrinojs/copy": "^9.0.0-rc.3",
@@ -28,6 +34,7 @@
     "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-import": "^2.17.3",
     "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
     "neutrino": "^9.0.0-rc.3",
     "prettier": "^1.18.2",
     "webpack": "^4.32.2",
