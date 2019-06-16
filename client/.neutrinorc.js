@@ -8,7 +8,7 @@ module.exports = {
     airbnbBase(),
     web({
       html: {
-        title: process.env.APPLICATION_NAME
+        title: `🔮 ${process.env.APPLICATION_NAME}`
       },
       env: {
         WEATHER_API_KEY: process.env.WEATHER_API_KEY

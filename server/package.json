@@ -2,26 +2,15 @@
   "name": "weatherforecat-server",
   "description": "The Weather Forecat - GraphQL Server",
   "version": "0.0.1",
-  "main": "index.js",
   "license": "MIT",
+  "main": "src/index.js",
   "scripts": {
-    "build": "dotenv webpack --mode production",
-    "start": "dotenv webpack-dev-server --mode development --open",
+    "start": "nodemon src/index.js",
+    "start:ci": "node src/index.js",
     "lint": "eslint --cache --format codeframe --ext mjs,js src",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
     "test:watch": "jest --watch"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn lint:fix",
-      "git add"
-    ]
   },
   "devDependencies": {
     "@neutrinojs/airbnb-base": "^9.0.0-rc.3",
@@ -39,8 +28,10 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
+    "apollo-datasource-rest": "^0.5.0",
     "apollo-server": "^2.6.3",
     "dotenv": "^8.0.0",
-    "graphql": "^14.3.1"
+    "graphql": "^14.3.1",
+    "nodemon": "^1.19.1"
   }
 }

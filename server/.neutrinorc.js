@@ -1,7 +1,9 @@
+const airbnbBase = require("@neutrinojs/airbnb-base");
+const jest = require("@neutrinojs/jest");
+
 module.exports = {
   use: [
-    '@neutrinojs/airbnb-base',
-    '@neutrinojs/node',
-    '@neutrinojs/jest'
+    airbnbBase(),
+    jest()
   ]
 };
