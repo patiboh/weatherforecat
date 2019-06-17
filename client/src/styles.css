@@ -48,7 +48,7 @@ form {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
   white-space: pre-wrap;
   margin-top: 0;
 }
@@ -78,13 +78,19 @@ pre {
   }
 }
 
-@media(min-width: 768px) and (min-height: 768px) {
+@media(min-width: 768px){
   h1 {
-    font-size: 5rem;
+    font-size: 3.5rem;
   }
   label {
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media(min-width: 960px){
+  label {
+    width: auto;
   }
 }
 
@@ -93,11 +99,11 @@ pre {
 
 #root {
   background-image: url('./static/images/tup.jpg');
-  background-position: center;
+  background-position: center bottom;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: var(--color-background);
-  padding: 5rem;
+  padding: 3rem 1rem;
   margin: 0;
   width: 100vw;
   max-width: 100%;
@@ -115,7 +121,7 @@ pre {
 
 @media(min-width: 768px) and (min-height: 768px) {
   #root {
-    padding: 10rem 5rem;
+    padding: 2rem;
   }
 }
 
@@ -123,15 +129,15 @@ pre {
 
 .form {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   align-content: center;
   justify-content: center;
-  margin-top: 15vh;
+  margin-top: 2rem;
 }
 
 .form input,
 .form button {
-  margin: 0 1rem;
+  margin: 1.5rem 1rem 0.5rem;
   padding: 8px;
   border-radius: 3px;
 }
@@ -140,8 +146,25 @@ pre {
   padding: 8px 32px;
 }  
 
-@media(min-width: 768px) and (min-height: 768px) {
-  form {
-    margin-top: 20vh;
+@media(min-width: 768px) {
+  .form {
+    flex-flow: row wrap;
+    margin-top: 0;
+  }
+
+  .form input,
+  .form button {
+    margin: 0 1rem;
+  }
+}
+
+@media(min-width: 960px) {
+  .form {
+    margin-top:20vh;
+  }
+
+  .form input,
+  .form button {
+    margin: 1.5rem 1rem 0.5rem;
   }
 }
