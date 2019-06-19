@@ -1,6 +1,6 @@
-export const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
+module.exports.WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
-export const REST_REST_DATA_SAMPLE = {
+module.exports.REST_REST_DATA_SAMPLE = {
   coord: { lon: 2.35, lat: 48.86 },
   weather: [{
     id: 804, main: 'Clouds', description: 'overcast clouds', icon: '04d',
@@ -21,3 +21,11 @@ export const REST_REST_DATA_SAMPLE = {
   name: 'Paris',
   cod: 200,
 };
+
+
+// module.exports.CONDITIONS = {
+//   "Clear": typeDefs.CONDITIONS.CLEAR,
+//   "Clouds": typeDefs.CONDITIONS.CLOUDS,
+//   "Rain": typeDefs.CONDITIONS.RAIN,
+//   "Snow": typeDefs.CONDITIONS.SNOW
+// }
