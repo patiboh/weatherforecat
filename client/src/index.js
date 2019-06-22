@@ -1,23 +1,11 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import gql from 'graphql-tag';
 
-import { DEFAULT_SEARCH } from './constants';
+import getForecast from './gql';
+import { DEFAULT_SEARCH, WEATHER_CONDITTIONS } from './constants';
 import './styles.css';
 
 const root = document.getElementById('root');
-const cache = new InMemoryCache();
-const link = new HttpLink({
-  uri: process.env.SERVER_URI,
-});
 
-const client = new ApolloClient({
-  cache,
-  link,
-});
-
-const displayForecat = (data, queryString = DEFAULT_SEARCH) => {
+const displayForecat = ({ data, queryString = DEFAULT_SEARCH }) => {
   let htmlContent = '';
   if (data) {
     htmlContent = `<article>
@@ -29,45 +17,6 @@ const displayForecat = (data, queryString = DEFAULT_SEARCH) => {
   }
   const responseContainer = document.querySelector('#response-container');
   responseContainer.insertAdjacentHTML('afterbegin', htmlContent);
-};
-
-const requestError = (error, searchText) => {
-  // eslint-disable-next-line
-  console.log(searchText + '\n' + error);
-};
-
-const GET_FORECAST = gql`
-  query GetForecast($city: String!) {
-    forecast(city: $city) {
-      location {
-        city
-        country
-      }
-      weather {
-        temperature {
-          units
-          degrees
-          min
-          max
-        }
-        conditions
-      }
-    }
-  }
-`;
-
-const getForecat = (queryString) => {
-  client
-    .query({
-      query: GET_FORECAST,
-      variables: {
-        city: queryString,
-      },
-    })
-    .then((result) => {
-      displayForecat(result.data, queryString);
-    })
-    .catch(error => requestError(error, queryString));
 };
 
 const init = () => {
@@ -89,7 +38,7 @@ const init = () => {
   searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     responseContainer.innerHTML = '';
-    getForecat(searchField.value);
+    getForecast(searchField.value, displayForecat);
   });
 };
 
