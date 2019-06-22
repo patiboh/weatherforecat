@@ -6,7 +6,7 @@ const resolvers = require('./resolvers');
 const WeatherAPI = require('./datasources/weather');
 const { WEATHER_API_URL } = require('./constants');
 
-const testWeatherApi = new WeatherAPI({
+const weatherApi = new WeatherAPI({
   url: WEATHER_API_URL,
   apiKey: process.env.WEATHER_API_KEY,
 });
@@ -15,7 +15,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => ({
-    weatherAPI: testWeatherApi,
+    weatherApi,
   }),
 });
 
