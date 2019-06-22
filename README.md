@@ -30,6 +30,6 @@ A weather app, an ode to my cat, and an excuse to play with data and shaders
 ## Roadmap
 
 - Get client sorted with OpenWeather API call - OK
-- Create GraphQL server for Weather Data - En cours
+- Create GraphQL server for Weather Data - OK
 - Create Visuals for Weather data - En cours
 - Make sure it won't eat all the resources in the machine
