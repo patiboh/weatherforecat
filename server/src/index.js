@@ -25,5 +25,5 @@ server.listen().then(({ url }) => {
 });
 
 if (module.hot) {
-  module.hot.accept('./app');
+  module.hot.accept('./');
 }
