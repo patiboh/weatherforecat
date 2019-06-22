@@ -65,7 +65,7 @@ module.exports.createStore = () => {
     createdAt: SQL.DATE,
     updatedAt: SQL.DATE,
     temperature: {
-      unit: SQL.STRING,
+      units: SQL.STRING,
       degrees: SQL.INTEGER,
       min: SQL.INTEGER,
       max: SQL.INTEGER,

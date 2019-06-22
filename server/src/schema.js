@@ -21,7 +21,7 @@ const typeDefs = gql`
     }
 
     type Temperature {
-        unit: String
+        units: String
         degrees: Float
         min: Float
         max: Float

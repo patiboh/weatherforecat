@@ -5,11 +5,13 @@ class WeatherAPI extends RESTDataSource {
     super();
     this.baseURL = url;
     this.apiKey = apiKey;
+    this.units = 'metric';
   }
 
   async getWeatherByCity({ city }) {
     const response = await this.get('weather', {
       q: city,
+      units: this.units,
       APPID: this.apiKey,
     });
     return this.weatherReducer(response);
@@ -26,7 +28,7 @@ class WeatherAPI extends RESTDataSource {
       },
       weather: {
         temperature: {
-          unit: '',
+          units: '',
           degrees: data.main.temp,
           min: data.main.temp_min,
           max: data.main.temp_max,

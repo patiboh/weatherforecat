@@ -45,7 +45,7 @@ const GET_FORECAST = gql`
       }
       weather {
         temperature {
-          unit
+          units
           degrees
           min
           max
