@@ -2,8 +2,7 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
     type Query {
-        city: String!
-        country: String
+        forecast(city: String): Forecast
     }
 
     type ForecastResponse {
@@ -12,8 +11,7 @@ const typeDefs = gql`
     }
 
     type Location{
-        id: ID!
-        city:  String
+        city(city: String):  String
         country: String
     }
 
@@ -24,9 +22,9 @@ const typeDefs = gql`
 
     type Temperature {
         unit: String
-        degrees: Int
-        min: Int
-        max: Int
+        degrees: Float
+        min: Float
+        max: Float
     }
 
     enum CONDITIONS {
@@ -37,7 +35,7 @@ const typeDefs = gql`
     }
 
     type Forecast {
-        location: Location
+        location(city: String): Location
         weather: Weather
     }
 `;
