@@ -110,4 +110,5 @@ Temporary Items
 .apdisk
 
 ### Neutrino ###
-src/static
+client/build
+server/build
