@@ -1,10 +1,9 @@
 // import { createServer } from 'http';
 const { ApolloServer } = require('apollo-server');
-
 // const { createStore } = require('./utils');
-
 const typeDefs = require('./schema');
-// const resolvers = require('./resolvers');
+const resolvers = require('./resolvers');
+
 const WeatherAPI = require('./datasources/weather');
 
 
@@ -19,7 +18,7 @@ const server = new ApolloServer({
   typeDefs,
   dataSources: () => ({
     weatherAPI: new WeatherAPI(),
-  })
+  }),
 });
 
 server.listen().then(({ url }) => {

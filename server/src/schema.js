@@ -6,6 +6,11 @@ const typeDefs = gql`
         country: String
     }
 
+    type ForecastResponse {
+        success: Boolean!
+        forecast: Forecast
+    }
+
     type Location{
         id: ID!
         city:  String
@@ -32,7 +37,6 @@ const typeDefs = gql`
     }
 
     type Forecast {
-        success: Boolean!
         location: Location
         weather: Weather
     }
