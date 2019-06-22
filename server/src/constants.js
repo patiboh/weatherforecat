@@ -21,3 +21,28 @@ module.exports.REST_REST_DATA_SAMPLE = {
   name: 'Paris',
   cod: 200,
 };
+
+module.exports.REST_REST_DATA_SAMPLE2 = {
+  message: 'accurate',
+  cod: '200',
+  count: 1,
+  list: [{
+    id: 2643743,
+    name: 'London',
+    coord: { lat: 51.5085, lon: -0.1258 },
+    main: {
+      temp: 280.15, pressure: 1012, humidity: 81, temp_min: 278.15, temp_max: 281.15,
+    },
+    dt: 1485791400,
+    wind: { speed: 4.6, deg: 90 },
+    sys: { country: 'GB' },
+    rain: null,
+    snow: null,
+    clouds: { all: 90 },
+    weather: [{ // The first weather condition in API respond is primary. (OWM doc)
+      id: 701, main: 'Mist', description: 'mist', icon: '50d',
+    }, {
+      id: 300, main: 'Drizzle', description: 'light intensity drizzle', icon: '09d',
+    }],
+  }],
+};
