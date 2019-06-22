@@ -10,11 +10,12 @@ class WeatherAPI extends RESTDataSource {
   async getWeatherByCity({ city }) {
     const response = await this.get('weather', {
       q: city,
-      APPID: this.apiKey
+      APPID: this.apiKey,
     });
     return this.weatherReducer(response);
   }
 
+  /* eslint class-methods-use-this: ["error", { "exceptMethods": ["weatherReducer"] }] */
   weatherReducer(data) {
     // console.log(data);
     return {

@@ -7,5 +7,5 @@ module.exports = {
     CLOUDS: 'Clouds',
     RAIN: 'Rain',
     SNOW: 'Snow',
-  }
+  },
 };
