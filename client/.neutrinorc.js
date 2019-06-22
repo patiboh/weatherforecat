@@ -11,6 +11,9 @@ module.exports = {
       html: {
         title: `🔮 ${process.env.APPLICATION_NAME}`
       },
+      env: {
+        SERVER_URI: process.env.SERVER_URI
+      }
     }),
     copy({
       patterns: [

@@ -1,28 +1,74 @@
-// import { DEFAULT_SEARCH } from '@/constants';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import gql from 'graphql-tag';
 
+import { DEFAULT_SEARCH } from './constants';
 import './styles.css';
 
 const root = document.getElementById('root');
-// let searchedForText = DEFAULT_SEARCH;
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: process.env.SERVER_URI,
+});
 
-// const displayForecat = (data) => {
-//   let htmlContent = '';
-//   if (data) {
-//     htmlContent = `<article>
-//         <p>Weather in ${searchedForText}:</p>
-//         <pre>${JSON.stringify(data)}</pre>
-//       </article>`;
-//   } else {
-//     htmlContent = '<div class="error-no-data">Sorry, no weather data available</div>';
-//   }
-//   const responseContainer = document.querySelector('#response-container');
-//   responseContainer.insertAdjacentHTML('afterbegin', htmlContent);
-// };
+const client = new ApolloClient({
+  cache,
+  link,
+});
 
-// const requestError = (error, requestCategory) => {
-//   // eslint-disable-next-line
-//   console.log(requestCategory + '\n' + error);
-// };
+const displayForecat = (data, queryString = DEFAULT_SEARCH) => {
+  let htmlContent = '';
+  if (data) {
+    htmlContent = `<article>
+        <p>Weather in ${queryString}:</p>
+        <pre>${JSON.stringify(data)}</pre>
+      </article>`;
+  } else {
+    htmlContent = '<div class="error-no-data">Sorry, no weather data available</div>';
+  }
+  const responseContainer = document.querySelector('#response-container');
+  responseContainer.insertAdjacentHTML('afterbegin', htmlContent);
+};
+
+const requestError = (error, searchText) => {
+  // eslint-disable-next-line
+  console.log(searchText + '\n' + error);
+};
+
+const GET_FORECAST = gql`
+  query GetForecast($city: String!) {
+    forecast(city: $city) {
+      location {
+        city
+        country
+      }
+      weather {
+        temperature {
+          unit
+          degrees
+          min
+          max
+        }
+        conditions
+      }
+    }
+  }
+`;
+
+const getForecat = (queryString) => {
+  client
+    .query({
+      query: GET_FORECAST,
+      variables: {
+        city: queryString,
+      },
+    })
+    .then((result) => {
+      displayForecat(result.data, queryString);
+    })
+    .catch(error => requestError(error, queryString));
+};
 
 const init = () => {
   root.innerHTML = `
@@ -37,13 +83,13 @@ const init = () => {
   </div>`;
 
   const searchForm = document.querySelector('#search-form');
-  // const searchField = document.querySelector('#search-city');
+  const searchField = document.querySelector('#search-city');
   const responseContainer = document.querySelector('#response-container');
 
   searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     responseContainer.innerHTML = '';
-    // searchedForText = searchField.value;
+    getForecat(searchField.value);
   });
 };
 
