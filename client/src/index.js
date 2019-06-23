@@ -42,7 +42,7 @@ const init = () => {
       </form>
       <section id="response-container"></section>
     </section>
-    <section id="animation-container" class="animation-container">
+    <section id="animation-container" class="aspect-container">
       <canvas id="canvas"></canvas>
     </section>
   `;

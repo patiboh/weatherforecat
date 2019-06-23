@@ -15,6 +15,10 @@ const imageSrc = '../static/images/tup.jpg';
 
 function render() {
   uniforms.u_time.value += 0.05;
+  const canvas = renderer.domElement;
+  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+  camera.updateProjectionMatrix();
+
   renderer.render(scene, camera);
 }
 
@@ -56,7 +60,7 @@ export const initScene = () => {
    * Geometry, Texture & Mesh
    */
   // const geometry = new THREE.PlaneBufferGeometry(2, 2);
-  const geometry = new THREE.PlaneGeometry(10, 10 * 0.75);
+  const geometry = new THREE.PlaneGeometry(5, 5);
   const loader = new THREE.TextureLoader();
   // Load image file into a custom material
   const material = new THREE.MeshLambertMaterial({
