@@ -5,7 +5,7 @@ A weather app, an ode to my cat, and an excuse to play with data and shaders
 ## Technologies & Tools
 
 - [Apollo GraphQL](https://www.apollographql.com/)
-- [Neutrino (testing version 9.0.0-rc.3)](https://neutrinojs.org/)
+- [Neutrino (testing version 9.0.0-rc.3)](https://master.neutrinojs.org/)
 - [WebGL](https://get.webgl.org/)
 - [three.js](https://threejs.org/)
 - [OpenWeatherMap API](https://openweathermap.org/)
@@ -32,3 +32,14 @@ A weather app, an ode to my cat, and an excuse to play with data and shaders
 - Create GraphQL server for Weather Data - OK
 - Create Visuals for Weather data - En cours
 - Make sure it won't eat all the resources in the machine
+
+## Some Resources
+
+The docs of the projects mentioned above
+
+### Shaders
+
+* https://thebookofshaders.com/
+* https://threejsfundamentals.org/
+* https://webglfundamentals.org/
+* http://learnwebgl.brown37.net/09_lights/fragment_shader_debugging.html
