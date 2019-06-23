@@ -4,12 +4,11 @@ A weather app, an ode to my cat, and an excuse to play with data and shaders
 
 ## Technologies & Tools
 
-- [GraphQL](https://graphql.org/)
-- [Apollo](https://www.apollographql.com/docs/)
+- [Apollo GraphQL](https://www.apollographql.com/)
 - [Neutrino (testing version 9.0.0-rc.3)](https://neutrinojs.org/)
 - [WebGL](https://get.webgl.org/)
 - [three.js](https://threejs.org/)
-- [OpenWeatherMap API](https://openweathermap.org/current)
+- [OpenWeatherMap API](https://openweathermap.org/)
 
 ## Motivations
 
@@ -29,7 +28,7 @@ A weather app, an ode to my cat, and an excuse to play with data and shaders
 
 ## Roadmap
 
-- Get client sorted with OpenWeather API call - OK
+- Get client sorted with OpenWeatherMap API call - OK
 - Create GraphQL server for Weather Data - OK
 - Create Visuals for Weather data - En cours
 - Make sure it won't eat all the resources in the machine
