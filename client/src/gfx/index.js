@@ -26,7 +26,7 @@ const uniforms = {
 };
 
 // const imageSrc = '../static/images/tup.png';
-const imageSrc = '../static/images/tup.png';
+const imageSrc = '../static/images/tup-on-black.jpg';
 const depthMapSrc = '../static/images/tup-depth-map.jpg';
 
 function render() {
@@ -60,7 +60,7 @@ export const initScene = () => {
     farPlane,
   );
   // camera.position.z = 5;
-  // camera.position.set(0.5, 0.5, 4);
+  camera.position.set(0.5, 0.5, 4);
 
   /**
    * Scene
@@ -82,24 +82,24 @@ export const initScene = () => {
   const depthMap = loader.load(depthMapSrc);
 
   // Load image file into a custom material
-  // const material = new THREE.MeshLambertMaterial({
-  //   map: loader.load(imageSrc),
-  // });
-  const material = new THREE.ShaderMaterial({
-    uniforms: {
-      ...uniforms,
-      image: {
-        type: 'sampler2D',
-        value: image,
-      },
-      depthMap: {
-        type: 'sampler2D',
-        value: depthMap,
-      },
-    },
-    vertexShader: vert,
-    fragmentShader: frag,
+  const material = new THREE.MeshLambertMaterial({
+    map: loader.load(imageSrc),
   });
+  // const material = new THREE.ShaderMaterial({
+  //   uniforms: {
+  //     ...uniforms,
+  //     image: {
+  //       type: 'sampler2D',
+  //       value: image,
+  //     },
+  //     depthMap: {
+  //       type: 'sampler2D',
+  //       value: depthMap,
+  //     },
+  //   },
+  //   vertexShader: vert,
+  //   fragmentShader: frag,
+  // });
 
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
