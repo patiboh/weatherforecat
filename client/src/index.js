@@ -1,5 +1,5 @@
 import getForecast from './api';
-import { initScene, animate } from './three/images';
+import { initScene, animate } from './gfx';
 
 import { DEFAULT_SEARCH, WEATHER_CONDITTIONS } from './constants';
 import './styles.css';
