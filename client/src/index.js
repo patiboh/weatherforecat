@@ -1,25 +1,11 @@
-import * as THREE from 'three';
-
 import getForecast from './api';
-import {
-  uniforms, geometry, material, light, camera,
-} from './three/images';
+import { initScene, animate } from './three/images';
 
 import { DEFAULT_SEARCH, WEATHER_CONDITTIONS } from './constants';
 import './styles.css';
 
-let scene;
 const root = document.getElementById('root');
 const app = document.createElement('main');
-
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-
-// eslint-disable-nex =t-line no-unused-vars
-const onWindowResize = () => {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  uniforms.u_resolution.value.x = renderer.domElement.width;
-  uniforms.u_resolution.value.y = renderer.domElement.height;
-};
 
 const displayForecat = ({ data, queryString = DEFAULT_SEARCH }) => {
   let htmlContent = '';
@@ -45,7 +31,7 @@ const animateConditions = (conditions) => {
   }
 };
 
-const initForm = () => {
+const init = () => {
   app.innerHTML = `
     <section class="form-container" id="form">
       <h1>The Weather Forecat</h1>
@@ -56,7 +42,9 @@ const initForm = () => {
       </form>
       <section id="response-container"></section>
     </section>
-    <section id="animation-container" class="animation-container"></section>
+    <section id="animation-container" class="animation-container">
+      <canvas id="canvas"></canvas>
+    </section>
   `;
   root.appendChild(app);
   const searchForm = document.querySelector('#search-form');
@@ -71,36 +59,7 @@ const initForm = () => {
   });
 };
 
-const initScene = () => {
-  scene = new THREE.Scene();
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-  scene.add(light);
-  renderer.setPixelRatio(window.devicePixelRatio);
-
-  const animationContainer = document.querySelector('#animation-container');
-  animationContainer.appendChild(renderer.domElement);
-
-  onWindowResize();
-  window.addEventListener('resize', onWindowResize, false);
-
-  document.onmousemove = (e) => {
-    uniforms.u_mouse.value.x = e.pageX;
-    uniforms.u_mouse.value.y = e.pageY;
-  };
-};
-
-const render = () => {
-  uniforms.u_time.value += 0.05;
-  renderer.render(scene, camera);
-};
-
-const animate = () => {
-  requestAnimationFrame(animate);
-  render();
-};
-
-initForm();
+init();
 initScene();
 animate();
 

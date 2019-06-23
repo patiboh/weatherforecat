@@ -1,52 +1,87 @@
 import * as THREE from 'three';
 
-export const geometry = new THREE.PlaneGeometry(10, 10 * 0.75);
+let camera;
+let scene;
+let renderer;
+let light;
 
-export const uniforms = {
+const uniforms = {
   u_time: { type: 'f', value: 1.0 },
   u_resolution: { type: 'v2', value: new THREE.Vector2() },
   u_mouse: { type: 'v2', value: new THREE.Vector2() },
 };
 
-// Load an image file into a custom material
-const loader = new THREE.TextureLoader();
-const imagesMaterial = () => new THREE.MeshLambertMaterial({
-  map: loader.load('./static/images/tup.jpg'),
-});
+const imageSrc = '../static/images/tup.jpg';
 
-const imagesCamera = () => {
-  // Specify the portion of the scene visiable at any time (in degrees)
+function render() {
+  uniforms.u_time.value += 0.05;
+  renderer.render(scene, camera);
+}
+
+// eslint-disable-next-line no-unused-vars
+function onWindowResize(event) {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  uniforms.u_resolution.value.x = renderer.domElement.width;
+  uniforms.u_resolution.value.y = renderer.domElement.height;
+}
+
+export const initScene = () => {
+  /**
+   * Camera
+   */
   const fieldOfView = 75;
-
-  // Specify the camera's aspect ratio
   const aspectRatio = window.innerWidth / window.innerHeight;
-
-  // Specify the near and far clipping planes. Only objects
-  // between those planes will be rendered in the scene
-  // (these values help control the number of items rendered
-  // at any given time)
   const nearPlane = 0.1;
   const farPlane = 1000;
-
-  const cam = new THREE.PerspectiveCamera(
+  camera = new THREE.PerspectiveCamera(
     fieldOfView,
     aspectRatio,
     nearPlane,
     farPlane,
   );
-  // Finally, set the camera's position in the z-dimension
-  cam.position.z = 5;
-  return cam;
-};
+  camera.position.z = 5;
+  // camera.position.set(15, 10, 15);
 
-// Add a point light with #fff color, .7 intensity, and 0 distance
-const pointLight = () => {
-  const light = new THREE.PointLight(0xffffff, 1, 0);
+  /**
+   * Scene
+   */
+  scene = new THREE.Scene();
+  // Add a point of white light
+  light = new THREE.PointLight(0xffffff, 1, 0);
   // Specify the light's position
   light.position.set(1, 1, 100);
-  return light;
+  scene.add(light);
+
+  /**
+   * Geometry, Texture & Mesh
+   */
+  // const geometry = new THREE.PlaneBufferGeometry(2, 2);
+  const geometry = new THREE.PlaneGeometry(10, 10 * 0.75);
+  const loader = new THREE.TextureLoader();
+  // Load image file into a custom material
+  const material = new THREE.MeshLambertMaterial({
+    map: loader.load(imageSrc),
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  /**
+   * Init Renderer
+   */
+  const canvas = document.getElementById('canvas');
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+
+  onWindowResize();
+  window.addEventListener('resize', onWindowResize, false);
+
+  // document.onmousemove = (e) => {
+  //   uniforms.u_mouse.value.x = e.pageX;
+  //   uniforms.u_mouse.value.y = e.pageY;
+  // };
 };
 
-export const material = imagesMaterial();
-export const camera = imagesCamera();
-export const light = pointLight();
+export const animate = () => {
+  requestAnimationFrame(animate);
+  render();
+};
