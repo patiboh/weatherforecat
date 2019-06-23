@@ -33,18 +33,18 @@ const animateConditions = (conditions) => {
 
 const init = () => {
   app.innerHTML = `
-    <section class="form-container" id="form">
+    <section id="form" class="form-container">
       <h1>The Weather Forecat</h1>
       <form id="search-form" action="#" class="form">
           <label for="search-city">Choose your city</label>
           <input id="search-city" type="text" name="search-city" placeholder="e.g. Paris" required>
           <button id="submit-btn" type="submit" value="Submit">Submit</button>
       </form>
-      <section id="response-container"></section>
     </section>
     <section id="animation-container" class="aspect-container">
       <canvas id="canvas"></canvas>
     </section>
+    <section id="response-container" class="footer"></section>
   `;
   root.appendChild(app);
   const searchForm = document.querySelector('#search-form');

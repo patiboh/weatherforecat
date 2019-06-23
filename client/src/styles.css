@@ -29,8 +29,7 @@ p,
 pre,
 .container {
   padding: 0;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
 }
 
 h1,
@@ -57,7 +56,7 @@ form {
 h1 {
   font-size: 2.8rem;
   white-space: pre-wrap;
-  margin-top: 0;
+  margin: 0 auto;
   display: inline-block;
 }
 
@@ -101,12 +100,7 @@ pre {
 /** LAYOUT */
 
 #root {
-  /* background-image: url('./static/images/tup.jpg');
-  background-position: center bottom;
-  background-size: contain;
-  background-repeat: no-repeat; */
   background-color: var(--color-background);
-  /* padding: 3rem 1rem; */
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -138,16 +132,13 @@ pre {
   left: 0;
   width: 100vw;
   z-index: 1;
-  /* display: flex;
+  display: flex;
   flex-flow: column wrap;
   align-content: center;
-  justify-content: center; */
+  justify-content: center;
   padding: 2rem;
 }
 
-.form {
-  display: inline-block;
-} 
 
 .form input,
 .form button {
@@ -173,12 +164,14 @@ pre {
 }
 
 @media(min-width: 960px) {
-  .form {
-    /* margin-top:20vh; */
-  }
-
   .form input,
   .form button {
     margin: 1.5rem 1rem 0.5rem;
   }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  padding: 2rem;
 }
