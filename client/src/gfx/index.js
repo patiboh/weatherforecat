@@ -1,17 +1,33 @@
 import * as THREE from 'three';
 
+import vert from './shaders/depth.vert';
+import frag from './shaders/depth.frag';
+// import vert from './shaders/test.vert';
+// import frag from './shaders/test.frag';
+
 let camera;
 let scene;
 let renderer;
 let light;
 
 const uniforms = {
-  u_time: { type: 'f', value: 1.0 },
-  u_resolution: { type: 'v2', value: new THREE.Vector2() },
-  u_mouse: { type: 'v2', value: new THREE.Vector2() },
+  u_time: {
+    type: 'f',
+    value: 1.0,
+  },
+  u_resolution: {
+    type: 'v2',
+    value: new THREE.Vector2(),
+  },
+  u_mouse: {
+    type: 'v2',
+    value: new THREE.Vector2(),
+  },
 };
 
-const imageSrc = '../static/images/tup.jpg';
+// const imageSrc = '../static/images/tup.png';
+const imageSrc = '../static/images/tup.png';
+const depthMapSrc = '../static/images/tup-depth-map.jpg';
 
 function render() {
   uniforms.u_time.value += 0.05;
@@ -33,7 +49,7 @@ export const initScene = () => {
   /**
    * Camera
    */
-  const fieldOfView = 75;
+  const fieldOfView = 100;
   const aspectRatio = window.innerWidth / window.innerHeight;
   const nearPlane = 0.1;
   const farPlane = 1000;
@@ -43,8 +59,8 @@ export const initScene = () => {
     nearPlane,
     farPlane,
   );
-  camera.position.z = 5;
-  // camera.position.set(15, 10, 15);
+  // camera.position.z = 5;
+  // camera.position.set(0.5, 0.5, 4);
 
   /**
    * Scene
@@ -59,13 +75,32 @@ export const initScene = () => {
   /**
    * Geometry, Texture & Mesh
    */
-  // const geometry = new THREE.PlaneBufferGeometry(2, 2);
-  const geometry = new THREE.PlaneGeometry(5, 5);
+  // const geometry = new THREE.PlaneGeometry(5, 5);
+  const geometry = new THREE.PlaneBufferGeometry(7, 8);
   const loader = new THREE.TextureLoader();
+  const image = loader.load(imageSrc);
+  const depthMap = loader.load(depthMapSrc);
+
   // Load image file into a custom material
-  const material = new THREE.MeshLambertMaterial({
-    map: loader.load(imageSrc),
+  // const material = new THREE.MeshLambertMaterial({
+  //   map: loader.load(imageSrc),
+  // });
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      ...uniforms,
+      image: {
+        type: 'sampler2D',
+        value: image,
+      },
+      depthMap: {
+        type: 'sampler2D',
+        value: depthMap,
+      },
+    },
+    vertexShader: vert,
+    fragmentShader: frag,
   });
+
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
@@ -73,16 +108,20 @@ export const initScene = () => {
    * Init Renderer
    */
   const canvas = document.getElementById('canvas');
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    // alpha: true,
+  });
   renderer.setPixelRatio(window.devicePixelRatio);
 
   onWindowResize();
   window.addEventListener('resize', onWindowResize, false);
 
-  // document.onmousemove = (e) => {
-  //   uniforms.u_mouse.value.x = e.pageX;
-  //   uniforms.u_mouse.value.y = e.pageY;
-  // };
+  document.onmousemove = (e) => {
+    uniforms.u_mouse.value.x = e.pageX;
+    uniforms.u_mouse.value.y = e.pageY;
+  };
 };
 
 export const animate = () => {
