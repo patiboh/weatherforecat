@@ -30,7 +30,7 @@ A weather app, an ode to my cat, and an excuse to play with data and shaders
 
 - Get client sorted with OpenWeatherMap API call - OK
 - Create GraphQL server for Weather Data - OK
-- Create Visuals for Weather data - En cours
+- Create Visuals for Weather data - This will take me longer than I thought - shaders are complex. I realize I need to think carefully about what I'm doing in the shaders in order to do what I want to do and not just some lucky copy/paste that happens to work (which I have also tried of course ...). It should be fun :)
 - Make sure it won't eat all the resources in the machine
 
 ## Some Resources
@@ -43,3 +43,6 @@ The docs of the projects mentioned above
 * https://threejsfundamentals.org/
 * https://webglfundamentals.org/
 * http://learnwebgl.brown37.net/09_lights/fragment_shader_debugging.html
+  * > The easiest way to minimize debugging is to write a correct shader program that functions correctly.
+  * ^ I'm going to follow this advice
+* https://tympanus.net/codrops/2019/02/20/how-to-create-a-fake-3d-image-effect-with-webgl/
