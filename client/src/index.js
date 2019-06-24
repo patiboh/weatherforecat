@@ -11,8 +11,8 @@ const displayForecat = ({ data, queryString = DEFAULT_SEARCH }) => {
   let htmlContent = '';
   if (data) {
     htmlContent = `<article>
-        <p>Weather in ${queryString}:</p>
-        <pre>${JSON.stringify(data)}</pre>
+        <h3>Weather in ${queryString},  ${data.forecast.location.country}:</h3>
+        <p>${data.forecast.weather.conditions}, ${data.forecast.weather.temperature.degrees} C°</p>
       </article>`;
   } else {
     htmlContent = '<div class="error-no-data">Sorry, no weather data available</div>';
