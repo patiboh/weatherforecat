@@ -75,33 +75,59 @@ export const initScene = () => {
   /**
    * Geometry, Texture & Mesh
    */
-  // const geometry = new THREE.PlaneGeometry(5, 5);
-  const geometry = new THREE.PlaneBufferGeometry(7, 8);
+  // original comments : https://bl.ocks.org/duhaime/c8375f1c313587ac629e04e0253481f9
+  // Identify the image size
+  const imageSize = { width: 7, height: 8 };
+  const geometry = new THREE.BufferGeometry(imageSize.width, imageSize.height);
+  const coords = { x: -5, y: -4.25, z: 0 };
+  const vertices = new Float32Array([
+    coords.x, coords.y, coords.z, // bottom left
+    coords.x + imageSize.width, coords.y, coords.z, // bottom right
+    coords.x + imageSize.width, coords.y + imageSize.height, coords.z, // upper right
+    coords.x, coords.y + imageSize.height, coords.z, // upper left
+  ]);
+  // set the uvs for this box; these identify the following corners:
+  // lower-left, lower-right, upper-right, upper-left
+  const uvs = new Float32Array([
+    0.0, 0.0,
+    1.0, 0.0,
+    1.0, 1.0,
+    0.0, 1.0,
+  ]);
+  // indices = sequence of index positions in `vertices` to use as vertices
+  // we make two triangles but only use 4 distinct vertices in the object
+  // the second argument to THREE.BufferAttribute is the number of elements
+  // in the first argument per vertex
+  geometry.setIndex([0, 1, 2, 2, 3, 0]);
+  geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+  geometry.addAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+
+  // Create a texture loader so we can load our image file
   const loader = new THREE.TextureLoader();
+
+  // specify custom uniforms and attributes for shaders
+  // Uniform types: https://github.com/mrdoob/three.js/wiki/Uniforms-types
   const image = loader.load(imageSrc);
   const depthMap = loader.load(depthMapSrc);
-
-  // Load image file into a custom material
-  const material = new THREE.MeshLambertMaterial({
-    map: loader.load(imageSrc),
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      ...uniforms,
+      image: {
+        type: 't',
+        value: image,
+      },
+      depthMap: {
+        type: 't',
+        value: depthMap,
+      },
+    },
+    vertexShader: vert,
+    fragmentShader: frag,
   });
-  // const material = new THREE.ShaderMaterial({
-  //   uniforms: {
-  //     ...uniforms,
-  //     image: {
-  //       type: 'sampler2D',
-  //       value: image,
-  //     },
-  //     depthMap: {
-  //       type: 'sampler2D',
-  //       value: depthMap,
-  //     },
-  //   },
-  //   vertexShader: vert,
-  //   fragmentShader: frag,
-  // });
 
   const mesh = new THREE.Mesh(geometry, material);
+  // Set the position of the image mesh in the x,y,z dimensions
+  mesh.position.set(0, 0, 0);
   scene.add(mesh);
 
   /**
