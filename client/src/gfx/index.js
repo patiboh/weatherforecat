@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from './three/OrbitControls';
 
 import vert from './shaders/depth.vert';
 import frag from './shaders/depth.frag';
@@ -9,6 +10,7 @@ let camera;
 let scene;
 let renderer;
 let light;
+let controls;
 
 const uniforms = {
   u_time: {
@@ -34,6 +36,7 @@ function render() {
   const canvas = renderer.domElement;
   camera.aspect = canvas.clientWidth / canvas.clientHeight;
   camera.updateProjectionMatrix();
+  controls.update();
 
   renderer.render(scene, camera);
 }
@@ -101,7 +104,6 @@ export const initScene = () => {
   geometry.setIndex([0, 1, 2, 2, 3, 0]);
   geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
   geometry.addAttribute('uv', new THREE.BufferAttribute(uvs, 2));
-
   // Create a texture loader so we can load our image file
   const loader = new THREE.TextureLoader();
 
@@ -112,11 +114,11 @@ export const initScene = () => {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       ...uniforms,
-      image: {
+      u_image: {
         type: 't',
         value: image,
       },
-      depthMap: {
+      u_depthMap: {
         type: 't',
         value: depthMap,
       },
@@ -140,6 +142,9 @@ export const initScene = () => {
     // alpha: true,
   });
   renderer.setPixelRatio(window.devicePixelRatio);
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.zoomSpeed = 0.4;
+  controls.panSpeed = 0.4;
 
   onWindowResize();
   window.addEventListener('resize', onWindowResize, false);
