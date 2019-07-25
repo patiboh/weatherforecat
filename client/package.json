@@ -41,6 +41,9 @@
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1"
   },
+  "peerDependencies": {
+    "lodash": "^4.17.15"
+  },
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
