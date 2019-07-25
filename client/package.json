@@ -42,7 +42,7 @@
     "webpack-dev-server": "^3.4.1"
   },
   "peerDependencies": {
-    "lodash": "^4.17.13"
+    "lodash": "^4.17.15"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.2",
