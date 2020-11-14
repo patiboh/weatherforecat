@@ -11,6 +11,7 @@ let scene;
 let renderer;
 let light;
 let controls;
+let animationFrame
 
 const uniforms = {
   u_time: {
@@ -155,7 +156,11 @@ export const initScene = () => {
   };
 };
 
-export const animate = () => {
-  requestAnimationFrame(animate);
+export function animate() {
+  animationFrame = requestAnimationFrame(animate);
   render();
+};
+
+export function stop() {
+  cancelAnimationFrame(animationFrame)
 };

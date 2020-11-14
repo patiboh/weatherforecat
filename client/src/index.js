@@ -1,5 +1,5 @@
 import getForecast from './api';
-import { initScene, animate } from './gfx';
+import { initScene, animate, stop } from './gfx';
 
 import { DEFAULT_SEARCH, WEATHER_CONDITTIONS } from './constants';
 import './styles.css';
@@ -39,6 +39,7 @@ const init = () => {
           <label for="search-city">Choose your city</label>
           <input id="search-city" type="text" name="search-city" placeholder="e.g. Paris" required>
           <button id="submit-btn" type="submit" value="Submit">Submit</button>
+          <button id="stop-btn" type="button" value="Stop animation">Stop</button>
       </form>
     </section>
     <section id="animation-container" class="aspect-container">
@@ -49,6 +50,7 @@ const init = () => {
   root.appendChild(app);
   const searchForm = document.querySelector('#search-form');
   const searchField = document.querySelector('#search-city');
+  const stopBtn = document.querySelector('#stop-btn');
   const responseContainer = document.querySelector('#response-container');
 
   searchForm.addEventListener('submit', (e) => {
@@ -56,6 +58,10 @@ const init = () => {
     responseContainer.innerHTML = '';
     getForecast(searchField.value, displayForecat);
     getForecast(searchField.value, animateConditions);
+  });
+  stopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    stop()
   });
 };
 
