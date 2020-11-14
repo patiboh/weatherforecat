@@ -61,7 +61,7 @@ const init = () => {
   });
   stopBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    stop()
+    stop();
   });
 };
 
